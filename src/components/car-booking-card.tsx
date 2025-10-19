@@ -4,12 +4,15 @@ import { FormEvent, useState } from "react";
 import { MapPin } from "lucide-react";
 import { Car } from "@/types/car";
 import { toast } from "react-toastify";
+import { useSession } from "next-auth/react";
+import Link from "next/link";
 
 interface CarBookingCardProps {
   car: Car;
 }
 
 export function CarBookingCard({ car }: CarBookingCardProps) {
+  const { data: session } = useSession();
   const [pickupDate, setPickupDate] = useState("");
   const [pickupTime, setPickupTime] = useState("10:00");
   const [returnDate, setReturnDate] = useState("");
@@ -183,9 +186,18 @@ export function CarBookingCard({ car }: CarBookingCardProps) {
       </div>
 
       {/* Book Button */}
-      <button disabled={isLoading} className="submit-button">
-        {isLoading ? "Loading..." : "Rent Now"}
-      </button>
+      {!session?.user ? (
+        <Link href="/auth/login">
+          <button className="submit-button">Login to Book</button>
+        </Link>
+      ) : (
+        <button
+          disabled={isLoading || !session?.user}
+          className="submit-button"
+        >
+          {isLoading ? "Loading..." : "Rent Now"}
+        </button>
+      )}
     </form>
   );
 }
