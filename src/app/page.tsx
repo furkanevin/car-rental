@@ -67,7 +67,7 @@ export default async function Home() {
                 Providing cheap car rental services and safe and comfortable
                 facilities.
               </p>
-              <button className="bg-[#54A6FF] hover:bg-[#3B8FD9] transition-colors px-6 py-3 rounded-lg text-white font-semibold text-sm">
+              <button className="bg-[#3563E9] hover:bg-[#2952CC] transition-colors px-6 py-3 rounded-lg text-white font-semibold text-sm">
                 Rental Car
               </button>
             </div>
@@ -263,7 +263,7 @@ export default async function Home() {
             >
               Show more car
             </Link>
-            <span className="text-gray-400 text-sm">120 Car</span>
+            <span className="text-gray-800 text-sm">120 Car</span>
           </div>
         </div>
       </div>
