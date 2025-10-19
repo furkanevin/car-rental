@@ -13,15 +13,13 @@ export async function fetchCars(): Promise<{
 
     // Fetch popular cars (Sports and high-rated)
     const popularRes = await fetch(
-      `${baseUrl}/api/cars?carType=Sports&limit=4`,
-      { cache: "no-store" }
+      `${baseUrl}/api/cars?carType=Sports&limit=4`
     );
     const popularData = await popularRes.json();
 
     // Fetch recommended cars (various types)
     const recommendedRes = await fetch(
-      `${baseUrl}/api/cars?limit=8&sortBy=averageRating&sortOrder=desc`,
-      { cache: "no-store" }
+      `${baseUrl}/api/cars?limit=8&sortBy=averageRating&sortOrder=desc`
     );
     const recommendedData = await recommendedRes.json();
 
@@ -44,7 +42,7 @@ export async function fetchCars(): Promise<{
 export async function fetchCarById(id: string): Promise<Car | null> {
   try {
     const baseUrl = process.env.NEXT_PUBLIC_BASE_URL || "http://localhost:3000";
-    const res = await fetch(`${baseUrl}/api/cars/${id}`, { cache: "no-store" });
+    const res = await fetch(`${baseUrl}/api/cars/${id}`);
     if (!res.ok) return null;
     const data = await res.json();
     return (data.car as Car) || null;

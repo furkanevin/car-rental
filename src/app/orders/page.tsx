@@ -1,5 +1,8 @@
-import { redirect } from "next/navigation";
-import { Metadata } from "next";
+"use client";
+
+import { useEffect, useState } from "react";
+import { useRouter } from "next/navigation";
+import { useSession } from "next-auth/react";
 import Link from "next/link";
 import {
   ShoppingBag,
@@ -9,74 +12,86 @@ import {
   CheckCircle,
   XCircle,
   AlertCircle,
+  Loader2,
 } from "lucide-react";
 import { getCarImageUrl } from "@/utils/car-helpers";
 import { OrderData } from "@/types/order";
-import connectDB from "@/lib/mongodb";
-import { Order } from "@/models/order";
-import Car from "@/models/car";
-import { getServerSession } from "next-auth";
-import { authOptions } from "@/lib/auth";
 
-export const metadata: Metadata = {
-  title: "My Orders - MORENT Car Rental",
-  description:
-    "View and manage your car rental orders. Track your active reservations and rental history with MORENT.",
-  robots: {
-    index: false,
-    follow: true,
-  },
-};
+export default function OrdersPage() {
+  const router = useRouter();
+  const { data: session, status } = useSession();
+  const [orders, setOrders] = useState<OrderData[]>([]);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState<string | null>(null);
 
-export default async function OrdersPage() {
-  // Session'dan kullanıcı bilgisini al
-  const session = await getServerSession(authOptions);
+  useEffect(() => {
+    // Redirect to login if not authenticated
+    if (status === "unauthenticated") {
+      router.push("/auth/login");
+      return;
+    }
 
-  // Kullanıcı oturum kontrolü
-  if (!session || !session.user) {
-    redirect("/auth/login");
+    // Fetch orders when authenticated
+    if (status === "authenticated") {
+      fetchOrders();
+    }
+  }, [status, router]);
+
+  const fetchOrders = async () => {
+    try {
+      setLoading(true);
+      setError(null);
+
+      const response = await fetch("/api/orders");
+
+      if (!response.ok) {
+        if (response.status === 401) {
+          router.push("/auth/login");
+          return;
+        }
+        throw new Error("Siparişler yüklenirken bir hata oluştu");
+      }
+
+      const data = await response.json();
+      setOrders(data.orders || []);
+    } catch (err) {
+      console.error("Error fetching orders:", err);
+      setError(err instanceof Error ? err.message : "Bir hata oluştu");
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  // Show loading spinner while checking authentication or fetching data
+  if (status === "loading" || loading) {
+    return (
+      <div className="min-h-screen bg-[#F6F7F9] flex items-center justify-center">
+        <div className="text-center">
+          <Loader2 className="w-12 h-12 text-[#3563E9] animate-spin mx-auto mb-4" />
+          <p className="text-gray-600">Siparişler yükleniyor...</p>
+        </div>
+      </div>
+    );
   }
 
-  // Veritabanına bağlan
-  await connectDB();
-
-  // Kullanıcının siparişlerini al
-  const ordersData = await Order.find({ user: session.user.id })
-    .populate("product", "make modelName images pricePerDay carType")
-    .sort({ createdAt: -1 })
-    .lean();
-
-  // MongoDB dökümanlarını plain object'e çevir
-  const orders: OrderData[] = ordersData.map((order: any) => ({
-    _id: order._id.toString(),
-    createdAt: order.createdAt.toString(),
-    status: order.status,
-    totalAmount: order.totalAmount,
-    currency: order.currency,
-    user: {
-      firstName: "",
-      lastName: "",
-      email: "",
-    },
-    rental: {
-      pickupDate: order.rental.pickupDate.toString(),
-      returnDate: order.rental.returnDate.toString(),
-      pickupTime: order.rental.pickupTime,
-      returnTime: order.rental.returnTime,
-      pickupLocation: order.rental.pickupLocation,
-      dropoffLocation: order.rental.dropoffLocation,
-      days: order.rental.days,
-      additionalNotes: order.rental.additionalNotes,
-    },
-    product: {
-      _id: order.product._id.toString(),
-      make: order.product.make,
-      modelName: order.product.modelName,
-      images: order.product.images,
-      pricePerDay: order.product.pricePerDay,
-      carType: order.product.carType,
-    },
-  }));
+  // Show error state
+  if (error) {
+    return (
+      <div className="min-h-screen bg-[#F6F7F9] flex items-center justify-center">
+        <div className="bg-white rounded-xl p-8 shadow-sm text-center max-w-md">
+          <XCircle className="w-16 h-16 text-red-500 mx-auto mb-4" />
+          <h2 className="text-xl font-semibold text-gray-900 mb-2">Hata</h2>
+          <p className="text-gray-600 mb-4">{error}</p>
+          <button
+            onClick={fetchOrders}
+            className="bg-[#3563E9] hover:bg-[#2952CC] text-white font-semibold py-2 px-6 rounded-lg transition-colors"
+          >
+            Tekrar Dene
+          </button>
+        </div>
+      </div>
+    );
+  }
 
   const formatDate = (date: string) => {
     return new Date(date).toLocaleDateString("tr-TR", {

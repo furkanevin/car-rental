@@ -24,9 +24,9 @@ export async function GET(
     }
 
     // Find car by ID
-    const car = await Car.findById(id).lean();
+    const carData: any = await Car.findById(id).lean();
 
-    if (!car) {
+    if (!carData) {
       return NextResponse.json(
         {
           success: false,
@@ -35,6 +35,12 @@ export async function GET(
         { status: 404 }
       );
     }
+
+    // Serialize MongoDB document
+    const car = {
+      ...carData,
+      _id: carData._id.toString(),
+    };
 
     return NextResponse.json({
       success: true,

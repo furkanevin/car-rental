@@ -77,10 +77,16 @@ export async function GET(request: NextRequest) {
     const skip = (page - 1) * limit;
 
     // Execute query with pagination
-    const [cars, total] = await Promise.all([
+    const [carsData, total] = await Promise.all([
       Car.find(filter).sort(sort).skip(skip).limit(limit).lean(),
       Car.countDocuments(filter),
     ]);
+
+    // Serialize MongoDB documents
+    const cars = carsData.map((car: any) => ({
+      ...car,
+      _id: car._id.toString(),
+    }));
 
     const totalPages = Math.ceil(total / limit);
 
