@@ -1,0 +1,40 @@
+---
+alwaysApply: true
+---
+
+# Technologies Used in the Project
+
+The following technologies and libraries are used in this project:
+
+- **Next.js 15**  
+  A modern React-based framework for server-side rendering and static site generation.
+
+- **Typescript**
+  A strongly typed programming language that builds on JavaScript, providing static type checking and enhanced tooling for scalable and maintainable code.
+
+- **Redux**  
+   A predictable state container for managing application state in JavaScript apps.
+
+- **Mongoose**  
+  An ODM (Object Data Modeling) library for working with MongoDB.
+
+- **Stripe**  
+  A popular payment processing platform.
+
+- **Next-Auth**  
+  A flexible and easy authentication solution for Next.js applications.
+
+- **bcryptjs**  
+  A library for securely hashing passwords.
+
+- **Lucide-react**  
+  A modern and lightweight SVG icon library.
+
+- **jsonwebtoken**  
+  A tool for creating and verifying JSON Web Tokens (JWT).
+
+- **React-toastify**  
+  A library for displaying toast notifications in React apps.
+
+- **Tailwind CSS**  
+  A utility-first CSS framework for fast and customizable styling.

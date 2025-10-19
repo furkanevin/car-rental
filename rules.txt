@@ -1,0 +1,93 @@
+--- user rules ---
+
+When creating a new project, always start with a detailed PRD.md to establish clear requirements and specifications. Break implementation into manageable phases in the PRD. Implement the codebase incrementally, phase by phase, rather than attempting everything at once. Keep files modular and separated, in appropriate folders, with a maximum of 500 lines of code per file. Never make changes that aren't documented in the PRD.md. If user requests conflict with the current PRD, update the document first to reflect these changes before implementing them, ensuring the PRD remains the single source of truth for project direction.
+
+---  general rules ---
+
+You are an expert in TypeScript, Node.js, Next.js 15 App Router, React and Tailwind.
+
+Code Style and Structure
+
+- Write concise, technical TypeScript code with accurate examples.
+- Use functional and declarative programming patterns; avoid classes.
+- Prefer iteration and modularization over code duplication.
+- Use descriptive variable names with auxiliary verbs (e.g., isLoading, hasError).
+- Structure files: exported component, subcomponents, helpers, static content, types.
+
+Naming Conventions
+
+- Use lowercase with dashes for directories (e.g., components/auth-wizard).
+- Favor named exports for components.
+
+TypeScript Usage
+
+- Use TypeScript for all code; prefer interfaces over types.
+- Avoid enums; use maps instead.
+- Use functional components with TypeScript interfaces.
+
+Syntax and Formatting
+
+- Use the "function" keyword for pure functions.
+- Avoid unnecessary curly braces in conditionals; use concise syntax for simple statements.
+- Use declarative JSX.
+
+UI and Styling
+
+- Use Shadcn UI, Radix, and Tailwind for components and styling.
+- Implement responsive design with Tailwind CSS; use a mobile-first approach.
+- **For cursor styling, use only Tailwind CSS utility classes. Avoid any other CSS methods for cursor styles.**
+
+Performance Optimization
+
+- Minimize 'use client', 'useEffect', and 'setState'; favor React Server Components (RSC).
+- Wrap client components in Suspense with fallback.
+- Use dynamic loading for non-critical components.
+- Optimize images: use WebP format, include size data, implement lazy loading.
+
+Key Conventions
+
+- Optimize Web Vitals (LCP, CLS, FID).
+- Limit 'use client':
+  - Favor server components and Next.js SSR.
+  - Use only for Web API access in small components.
+  - Avoid for data fetching or state management.
+
+Follow Next.js docs for Data Fetching, Rendering, and Routing.
+Use Next.js 15 App router for routing
+
+
+---  technologies ---
+
+# Technologies Used in the Project
+
+The following technologies and libraries are used in this project:
+
+- **Next.js 15**  
+  A modern React-based framework for server-side rendering and static site generation.
+
+- **Redux**  
+   A predictable state container for managing application state in JavaScript apps.
+
+- **Mongoose**  
+  An ODM (Object Data Modeling) library for working with MongoDB.
+
+- **Stripe**  
+  A popular payment processing platform.
+
+- **Next-Auth**  
+  A flexible and easy authentication solution for Next.js applications.
+
+- **bcryptjs**  
+  A library for securely hashing passwords.
+
+- **Lucide-react**  
+  A modern and lightweight SVG icon library.
+
+- **jsonwebtoken**  
+  A tool for creating and verifying JSON Web Tokens (JWT).
+
+- **React-toastify**  
+  A library for displaying toast notifications in React apps.
+
+- **Tailwind CSS**  
+  A utility-first CSS framework for fast and customizable styling.
