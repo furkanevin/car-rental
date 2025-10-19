@@ -14,6 +14,7 @@ import { getCarImageUrl } from "@/utils/car-helpers";
 import { OrderData } from "@/types/order";
 import connectDB from "@/lib/mongodb";
 import { Order } from "@/models/order";
+import Car from "@/models/car";
 import { getServerSession } from "next-auth";
 import { authOptions } from "@/lib/auth";
 

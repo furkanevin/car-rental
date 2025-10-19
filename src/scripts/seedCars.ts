@@ -30,7 +30,7 @@ const carsData = [
     totalReviews: 92,
     mileage: 12000,
     color: "White",
-    licensePlate: "TX-ALT24",
+    licensePlate: "TX-ALT21",
     carType: "Sedan",
   },
   {
@@ -62,7 +62,7 @@ const carsData = [
     totalReviews: 145,
     mileage: 8500,
     color: "Dark Blue",
-    licensePlate: "FL-TELL8",
+    licensePlate: "FL-2ELL8",
     carType: "SUV",
   },
   {
