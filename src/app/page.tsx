@@ -94,10 +94,14 @@ export default async function Home() {
               </div>
               <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
                 <div>
-                  <label className="block text-sm font-bold text-gray-900 mb-2">
+                  <label
+                    htmlFor="locations"
+                    className="block text-sm font-bold text-gray-900 mb-2"
+                  >
                     Locations
                   </label>
                   <select
+                    id="locations"
                     disabled
                     className="w-full text-sm text-gray-400 bg-white border-0 focus:outline-none cursor-not-allowed"
                   >
@@ -105,10 +109,14 @@ export default async function Home() {
                   </select>
                 </div>
                 <div className="sm:border-l sm:border-gray-200 sm:pl-4">
-                  <label className="block text-sm font-bold text-gray-900 mb-2">
+                  <label
+                    htmlFor="date"
+                    className="block text-sm font-bold text-gray-900 mb-2"
+                  >
                     Date
                   </label>
                   <select
+                    id="date"
                     disabled
                     className="w-full text-sm text-gray-400 bg-white border-0 focus:outline-none cursor-not-allowed"
                   >
@@ -116,10 +124,14 @@ export default async function Home() {
                   </select>
                 </div>
                 <div className="sm:border-l sm:border-gray-200 sm:pl-4">
-                  <label className="block text-sm font-bold text-gray-900 mb-2">
+                  <label
+                    htmlFor="time"
+                    className="block text-sm font-bold text-gray-900 mb-2"
+                  >
                     Time
                   </label>
                   <select
+                    id="time"
                     disabled
                     className="w-full text-sm text-gray-400 bg-white border-0 focus:outline-none cursor-not-allowed"
                   >
@@ -131,7 +143,10 @@ export default async function Home() {
 
             {/* Swap Button */}
             <div className="flex-shrink-0">
-              <button className="w-14 h-14 bg-[#3563E9] rounded-lg flex items-center justify-center text-white hover:bg-[#2952CC] transition-colors shadow-md">
+              <button
+                aria-label="Swap pick-up and drop-off locations"
+                className="w-14 h-14 bg-[#3563E9] rounded-lg flex items-center justify-center text-white hover:bg-[#2952CC] transition-colors shadow-md"
+              >
                 <svg
                   className="w-6 h-6"
                   fill="none"
@@ -158,10 +173,14 @@ export default async function Home() {
               </div>
               <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
                 <div>
-                  <label className="block text-sm font-bold text-gray-900 mb-2">
+                  <label
+                    htmlFor="dropoff-locations"
+                    className="block text-sm font-bold text-gray-900 mb-2"
+                  >
                     Locations
                   </label>
                   <select
+                    id="dropoff-locations"
                     disabled
                     className="w-full text-sm text-gray-400 bg-white border-0 focus:outline-none cursor-not-allowed"
                   >
@@ -169,10 +188,14 @@ export default async function Home() {
                   </select>
                 </div>
                 <div className="sm:border-l sm:border-gray-200 sm:pl-4">
-                  <label className="block text-sm font-bold text-gray-900 mb-2">
+                  <label
+                    htmlFor="dropoff-date"
+                    className="block text-sm font-bold text-gray-900 mb-2"
+                  >
                     Date
                   </label>
                   <select
+                    id="dropoff-date"
                     disabled
                     className="w-full text-sm text-gray-400 bg-white border-0 focus:outline-none cursor-not-allowed"
                   >
@@ -180,10 +203,14 @@ export default async function Home() {
                   </select>
                 </div>
                 <div className="sm:border-l sm:border-gray-200 sm:pl-4">
-                  <label className="block text-sm font-bold text-gray-900 mb-2">
+                  <label
+                    htmlFor="dropoff-time"
+                    className="block text-sm font-bold text-gray-900 mb-2"
+                  >
                     Time
                   </label>
                   <select
+                    id="dropoff-time"
                     disabled
                     className="w-full text-sm text-gray-400 bg-white border-0 focus:outline-none cursor-not-allowed"
                   >

@@ -24,6 +24,10 @@ export const metadata: Metadata = {
     "Our vision is to provide convenience and help increase your sales business. Rent cars at best prices with flexible rental periods.",
   keywords: ["car rental", "rent a car", "MORENT", "vehicle hire"],
   authors: [{ name: "MORENT" }],
+  robots: {
+    index: true,
+    follow: true,
+  },
   openGraph: {
     type: "website",
     locale: "en_US",
